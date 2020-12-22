@@ -1,0 +1,12 @@
+{
+  "name": "QR-Hero",
+  "displayName": "QR-Hero",
+  "expo": {
+    "name": "QR-Hero",
+    "slug": "QR-Hero",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
