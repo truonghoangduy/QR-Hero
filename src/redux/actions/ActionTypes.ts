@@ -8,3 +8,6 @@ export const SCANNED = 'SCANNED';
 export const STORE_QR = 'STORE_QR';
 
 
+export const EDIT_QR = 'EDIT_QR';
+
+

@@ -4,16 +4,18 @@ import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 // redux-persist
 import { persistStore, persistCombineReducers } from 'redux-persist';
+
+import { qr_event, qr_store } from './reducer/QrEvent';
 import AsyncStorage from '@react-native-community/async-storage';
+
 const config = { key: 'root', storage: AsyncStorage, debug: true };
 
 
-import { qr_event } from './reducer/QrEvent'
 
 
 // export const ConfigureStore = () => {
 //     const store = createStore(
-//         persistCombineReducers(config, { qr_event }),
+//         persistCombineReducers(config, { qr_event,qr_store }),
 //         applyMiddleware(thunk, logger)
 //     );
 //     const persistor = persistStore(store);
@@ -23,7 +25,9 @@ import { qr_event } from './reducer/QrEvent'
 
 export const ConfigureStore = () => {
     const store = createStore(
-        combineReducers({ qr_event }),
+        //@ts-ignore
+        persistCombineReducers(config, { qr_event, qr_store }),
+        // combineReducers({ qr_event, qr_store }),
         applyMiddleware(thunk, logger)
     );
     // const persistor = persistStore(store);

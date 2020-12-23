@@ -11,7 +11,9 @@ import { connect } from 'react-redux';
 import Home from '../screens/Home';
 import { View, Text, Linking } from 'react-native';
 import { GenerateQRNavigatorScreen } from './CreateQRRoute';
-
+import HomeV2 from '../screens/HomeV2';
+import Posts from '../screens/Post';
+import Detail from '../screens/Detail'
 
 function CustomDrawerContent(props: any) {
     return (
@@ -46,11 +48,29 @@ function MainNavigatorScreen() {
     );
 }
 
+
+const MainStackNavigator = createStackNavigator();
+
+function MainNavigatorScreenV2() {
+    return (
+        <MainStackNavigator.Navigator>
+            <MainStackNavigator.Screen options={{ headerShown: false }}
+                name='Home' component={HomeV2}
+            />
+            <MainStackNavigator.Screen options={{ headerShown: false }}
+                name='Detail' component={Detail}
+            />
+            <MainStackNavigator.Screen name="Post" component={Posts}></MainStackNavigator.Screen>
+        </MainStackNavigator.Navigator>
+    );
+
+}
+
 export class Main extends Component {
     render() {
         return (
             <NavigationContainer>
-                <MainNavigatorScreen></MainNavigatorScreen>
+                <MainNavigatorScreenV2></MainNavigatorScreenV2>
             </NavigationContainer>
         );
     }

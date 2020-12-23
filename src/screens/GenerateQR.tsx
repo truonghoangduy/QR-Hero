@@ -6,7 +6,7 @@ import { Dimensions } from 'react-native';
 import { captureRef } from "react-native-view-shot";
 import * as MediaLibrary from 'expo-media-library';
 
-const UselessTextInput = (props: any) => {
+export const UselessTextInput = (props: any) => {
     return (
         <TextInput
             {...props} // Inherit any props passed to it; e.g., multiline, numberOfLines below
@@ -15,7 +15,7 @@ const UselessTextInput = (props: any) => {
     );
 }
 
-const SaveQRCode = (props: any) => {
+export const SaveQRCode = (props: any) => {
     const viewShot = useRef(null);
     async function onSave() {
         let imgPath: string = await captureRef(viewShot);

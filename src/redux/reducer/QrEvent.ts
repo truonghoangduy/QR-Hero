@@ -1,9 +1,9 @@
 import * as ActionTypes from '../actions/ActionTypes';
 import Clipboard from 'expo-clipboard';
-import { intialState, State } from '../interface';
+import { intialState, intialStateStoreQR, QR_CODE } from '../interface';
 
 
-export const qr_event = (state: State = intialState, action: any) => {
+export const qr_event = (state = intialState, action: any) => {
     switch (action.type) {
         case ActionTypes.OPEN_QR:
             return {
@@ -26,6 +26,30 @@ export const qr_event = (state: State = intialState, action: any) => {
             return {
                 ...state,
                 data: action.payload,
+            }
+        default:
+            return state;
+    }
+};
+
+
+
+export const qr_store = (state = intialStateStoreQR, action: any) => {
+    switch (action.type) {
+        case ActionTypes.STORE_QR:
+            return {
+                ...state,
+                data: state.data.concat(action.payload)
+            }
+
+        case ActionTypes.EDIT_QR:
+            var newState = { ...state };
+
+            var qr_id_index = state.data.findIndex((qr) => qr.id == action.payload.id)
+            //@ts-ignore
+            newState.data[qr_id_index] = action.payload;
+            return {
+                newState
             }
         default:
             return state;

@@ -11,10 +11,20 @@ const { store } = ConfigureStore();
 import { Main } from './src/routes/MainRoue'
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import * as MediaLibrary from 'expo-media-library';
+import * as Font from 'expo-font';
+import { useFonts } from 'expo-font';
+
 export default function App() {
+
 
   const [CameraHasPermission, setHasPermission] = useState<boolean>(false);
   const [MediaHasPermission, MediaSetHasPermission] = useState<boolean>(false);
+  const [FontLoad, setFontLoad] = useState<boolean>(false);
+  const [fontState] = useFonts({
+    'Bold': require('./src/fonts/Montserrat-ExtraBold.otf'),
+    'Medium': require('./src/fonts/Montserrat-Medium.otf'),
+    'Regular': require('./src/fonts/Montserrat-Regular.otf'),
+  });
   useEffect(() => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
@@ -24,17 +34,19 @@ export default function App() {
     })();
   }, []);
 
-  // return (
-  //   <Provider store={store}>
-  //     <PersistGate persistor={persistor}>
-  //       <Main></Main>
-  //     </PersistGate>
-  //   </Provider>
-  // );
 
-  return (
-    <Provider store={store}>
-      <Main></Main>
-    </Provider>
-  );
+  // if (CameraHasPermission && MediaHasPermission) {
+  if (!fontState) {
+    return (<Text>Loading</Text>);
+  } else {
+    return (
+      <Provider store={store}>
+        <Main></Main>
+      </Provider>
+    );
+  }
+
+  // }
+
+
 }

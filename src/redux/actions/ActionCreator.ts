@@ -10,8 +10,14 @@ export const close_qr = {
     payload: false
 }
 
-export const scanned_qr = (data: string) => ({
-    type: ActionTypes.SCANNED,
+export const store_qr = (data: any) => ({
+    type: ActionTypes.STORE_QR,
+    payload: data
+})
+
+
+export const edit_qr = (data: any) => ({
+    type: ActionTypes.STORE_QR,
     payload: data
 })
 
