@@ -43,13 +43,13 @@ export const qr_store = (state = intialStateStoreQR, action: any) => {
             }
 
         case ActionTypes.EDIT_QR:
-            var newState = { ...state };
-
+            var newData = [...state.data]
             var qr_id_index = state.data.findIndex((qr) => qr.id == action.payload.id)
             //@ts-ignore
-            newState.data[qr_id_index] = action.payload;
+            newData[qr_id_index] = { ...action.payload };
             return {
-                newState
+                ...state,
+                data: newData
             }
         default:
             return state;

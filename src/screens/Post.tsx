@@ -38,7 +38,7 @@ export default class Posts extends React.Component<{}, {}> {
                     }}>
                         <Text style={{
                             fontFamily: "Bold",
-                            fontSize: 14,
+                            fontSize: 13,
                             color: "#044244"
                         }}>{name}</Text>
 

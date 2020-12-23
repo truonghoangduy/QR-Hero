@@ -1,5 +1,5 @@
 import React, { Dispatch } from 'react';
-import { Text, View, ImageBackground, Image, Modal, TouchableOpacity } from 'react-native';
+import { Text, View, ImageBackground, Image, Modal, TouchableOpacity, Button, Dimensions } from 'react-native';
 import LottieView from 'lottie-react-native';
 import ModalEdit from './ModalEdit';
 import { Icon } from 'react-native-elements';
@@ -8,9 +8,12 @@ import * as actions from '../redux/actions/ActionCreator';
 import { QR_CODE } from '../redux/interface';
 import Svg from 'react-native-svg';
 import { SaveQRCode } from './GenerateQR';
-
+import * as Linking from 'expo-linking';
+const width = Dimensions.get("window").width;
+const height = Dimensions.get("window").height;
 interface IProps {
-    listOfQR: Array<QR_CODE>
+    listOfQR: Array<QR_CODE>,
+    copyToClipBoard: (data: any) => void;
 }
 
 class Detail extends React.Component<IProps, {}> {
@@ -28,6 +31,11 @@ class Detail extends React.Component<IProps, {}> {
 
     getQRData(qid: string) {
         return this.props.listOfQR.find(item => item.id == qid);
+    }
+
+    saveToClippBoard() {
+        this.props.copyToClipBoard(this.getQRData(this.props.route.params.qrID)?.data);
+
     }
 
     render() {
@@ -127,7 +135,7 @@ class Detail extends React.Component<IProps, {}> {
                         }}
                     /> */}
                     <Text style={{
-                        fontSize: 22,
+                        fontSize: width * 0.04,
                         fontFamily: "Bold",
                         color: "#044244",
                         alignSelf: "center"
@@ -243,6 +251,9 @@ class Detail extends React.Component<IProps, {}> {
                     <SaveQRCode value={this.getQRData(qrID)?.data}></SaveQRCode>
                 </View>
 
+                <View><Button title="Copy to clippboard" onPress={() => { this.saveToClippBoard() }}></Button></View>
+                <View><Button title="Open in browser" onPress={async () => { await Linking.openURL(this.getQRData(qrID)?.data as string) }}></Button></View>
+
                 {/* <View style={{ flexDirection: "row" }}>
                     <View style={{
                         backgroundColor: "#728c8e",
@@ -327,6 +338,8 @@ class Detail extends React.Component<IProps, {}> {
 const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
     copyToClipBoard: (data: string) => dispatch(actions.copy_to_clip_board(data))
 });
+
+
 
 
 const mapStateToProps = (state: any) => ({

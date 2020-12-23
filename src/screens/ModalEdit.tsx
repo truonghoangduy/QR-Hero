@@ -101,7 +101,7 @@ class ModalEdit extends React.Component<IProps, IState> {
                         <View style={{ backgroundColor: 'white', height: 40, borderRadius: 5 }}>
                             <UselessTextInput
                                 multiline
-                                onChangeText={(text: string) => this.onURLChangeText(text)}
+                                onChangeText={(text: string) => this.onNoteChangeText(text)}
                                 value={this.state.noteText}
                             />
                         </View>

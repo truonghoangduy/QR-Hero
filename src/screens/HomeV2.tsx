@@ -18,6 +18,7 @@ import Home from './Home';
 import * as actions from '../redux/actions/ActionCreator';
 import * as action_types from '../redux/actions/ActionTypes';
 import { QR_CODE } from '../redux/interface';
+import GenerateQR from './GenerateQR';
 
 interface IProps {
     listOfQR: []
@@ -164,9 +165,11 @@ class HomeV2 extends Component<IProps, {}> {
                         // animationType="fade"
                         // transparent={true}
                         visible={this.state.openQR}>
-                        <ScanModal onSavePress={() => {
-                            this.setState({ openQR: false })
-                        }} navigation={this.props.navigation}></ScanModal>
+                        <ScanModal
+                            onCanclePress={() => { this.setState({ openQR: false }) }}
+                            onSavePress={() => {
+                                this.setState({ openQR: false })
+                            }} navigation={this.props.navigation}></ScanModal>
                     </Modal>
                 </View>
 
@@ -208,7 +211,7 @@ class HomeV2 extends Component<IProps, {}> {
                             <Text style={{
                                 fontFamily: "Bold",
                                 color: this.state.popularSelected ? "#9ca1a2" : "#044244"
-                            }}>RECENT</Text>
+                            }}>Make</Text>
                         </TouchableOpacity>
                     </View>
 
@@ -255,13 +258,14 @@ class HomeV2 extends Component<IProps, {}> {
 
                     </View>
  */}
-                    <View>
+                    {this.state.popularSelected ? <View>
                         <FlatList
                             data={qr_data}
                             keyExtractor={(item, index) => index.toString()}
                             renderItem={({ item }) => this.renderPost(item)}
                         />
-                    </View>
+                    </View> : <GenerateQR></GenerateQR>}
+
 
 
                     <View style={{

@@ -9,7 +9,7 @@ const height = Dimensions.get("window").height;
 import * as actions from '../../redux/actions/ActionCreator';
 
 interface IProps {
-    storeQRCode: (data) => void,
+    storeQRCode: (data: any) => void,
 }
 
 class ScanModal extends Component<IProps, {}> {
@@ -17,7 +17,7 @@ class ScanModal extends Component<IProps, {}> {
     constructor(props: any) {
         super(props);
         this.state = {
-            scanned: false
+            scanned: false,
         }
     }
 
@@ -35,7 +35,9 @@ class ScanModal extends Component<IProps, {}> {
         return (
             <View style={styles.container}>
                 <BarCodeScanner style={[StyleSheet.absoluteFill]} onBarCodeScanned={this.state.scanned ? undefined : this.handleBarCodeScanned}></BarCodeScanner>
-                <Button style={{ justifyContent: "flex-end" }} onPress={() => { this.props.onSavePress() }} title="Save"></Button>
+                <Button style={{ justifyContent: "flex-start" }} onPress={() => { this.props.onSavePress() }} title="Save"></Button>
+                <Button style={{ justifyContent: "flex-end" }} onPress={() => { this.props.onCanclePress() }} title="Cancel"></Button>
+
             </View >
         )
     }

@@ -17,7 +17,7 @@ export const store_qr = (data: any) => ({
 
 
 export const edit_qr = (data: any) => ({
-    type: ActionTypes.STORE_QR,
+    type: ActionTypes.EDIT_QR,
     payload: data
 })
 
